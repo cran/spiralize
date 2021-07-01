@@ -1,0 +1,38 @@
+\name{spiral_rect}
+\alias{spiral_rect}
+\title{
+Add rectangles to a track
+}
+\description{
+Add rectangles to a track
+}
+\usage{
+spiral_rect(xleft, ybottom, xright, ytop, gp = gpar(),
+    track_index = current_track_index())
+}
+\arguments{
+
+  \item{xleft}{X-locations of the left bottom of the rectangles.}
+  \item{ybottom}{Y-locations of the left bottom of the rectangles.}
+  \item{xright}{X-locations of the right top of the rectangles.}
+  \item{ytop}{Y-locations of the right top of the rectangles.}
+  \item{gp}{Graphical parameters.}
+  \item{track_index}{Index of the track. }
+
+}
+\value{
+No value is returned.
+}
+\examples{
+# to simulate heatmap
+n = 1000
+require(circlize)
+col = circlize::colorRamp2(c(0, 0.5, 1), c("blue", "white", "red"))
+spiral_initialize(xlim = c(0, n))
+spiral_track(height = 0.9)
+
+x1 = runif(n)
+spiral_rect(1:n - 1, 0, 1:n, 0.5, gp = gpar(fill = col(x1), col = NA))
+x2 = runif(n)
+spiral_rect(1:n - 1, 0.5, 1:n, 1, gp = gpar(fill = col(x2), col = NA))
+}

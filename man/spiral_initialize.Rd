@@ -1,0 +1,58 @@
+\name{spiral_initialize}
+\alias{spiral_initialize}
+\title{
+Initialize the spiral
+}
+\description{
+Initialize the spiral
+}
+\usage{
+spiral_initialize(xlim = c(0, 1), start = 360, end = 360*5,
+    scale_by = c("angle", "curve_length"),
+    flip = c("none", "vertical", "horizontal", "both"), reverse = FALSE,
+    polar_lines = scale_by == "angle", polar_lines_by = 30,
+    polar_lines_gp = gpar(col = "#808080", lty = 3),
+    padding = unit(5, "mm"), newpage = TRUE, vp_param = list())
+}
+\arguments{
+
+  \item{xlim}{Range on x-locations.}
+  \item{start}{Start of the spiral, in degree. \code{start} and \code{end} should be positive and \code{start} should be smaller than \code{end}.}
+  \item{end}{End of the spiral, in degree.}
+  \item{scale_by}{How scales on x-axis are equally interpolated? The values can be one of "angle" and "curve_length". If the value is "angle", equal angle difference corresponds to equal difference of data. In this case, in outer loops, the scales are longer than in the inner loops, although the difference on the data are the same. If the value is "curve_length", equal curve length difference corresponds to the equal difference of the data.}
+  \item{flip}{How to flip the spiral? By default, the spiral starts from the origin of the coordinate and grows reverseclockwisely. The argument controls the growing direction of the spiral.}
+  \item{reverse}{By default, the most inside of the spiral corresponds to the lower boundary of x-location. Setting the value to \code{FALSE} can reverse the direction.}
+  \item{polar_lines}{Whether draw the polar guiding lines.}
+  \item{polar_lines_by}{Increment of the polar lines. Measured in degree.}
+  \item{polar_lines_gp}{Graphics parameters for the polar lines.}
+  \item{padding}{Padding of the plotting region. The value can be a \code{\link[grid]{unit}} of length of one to two.}
+  \item{newpage}{Whether to apply \code{\link[grid]{grid.newpage}} before making the plot?}
+  \item{vp_param}{A list of parameters sent to \code{\link[grid]{viewport}}.}
+
+}
+\value{
+No value is returned.
+}
+\examples{
+spiral_initialize(); spiral_track()
+spiral_initialize(start = 180, end = 360+180); spiral_track()
+spiral_initialize(flip = "vertical"); spiral_track()
+spiral_initialize(flip = "horizontal"); spiral_track()
+spiral_initialize(flip = "both"); spiral_track()
+spiral_initialize(); spiral_track(); spiral_axis()
+spiral_initialize(scale_by = "curve_length"); spiral_track(); spiral_axis()
+
+# the following example shows the difference of `scale_by` more clearly:
+make_plot = function(scale_by) {
+    n = 100
+    require(circlize)
+    col = circlize::colorRamp2(c(0, 0.5, 1), c("blue", "white", "red"))
+    spiral_initialize(xlim = c(0, n), scale_by = scale_by)
+    spiral_track(height = 0.9)
+
+    x = runif(n)
+    spiral_rect(1:n - 1, 0, 1:n, 1, gp = gpar(fill = col(x), col = NA))
+}
+make_plot("angle")
+make_plot("curve_length")
+}
