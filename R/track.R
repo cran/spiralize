@@ -8,7 +8,8 @@ empty_track_data = data.frame(
 	ymax = numeric(0),
 	rmin = numeric(0),
 	rmax = numeric(0),
-	rel_height = numeric(0)
+	rel_height = numeric(0),
+	reverse_y = logical(0)
 )
 
 track_env$track_data = empty_track_data
@@ -80,7 +81,7 @@ get_track_data = function(field, track_index = current_track_index()) {
 	if(field == "ycenter") {
 		(track_env$track_data[track_index, "ymin"] + track_env$track_data[track_index, "ymax"])/2
 	} else if(field == "ylim") {
-		c(track_env$track_data[track_index, "ymin"] + track_env$track_data[track_index, "ymax"])
+		c(track_env$track_data[track_index, "ymin"], track_env$track_data[track_index, "ymax"])
 	} else if(field == "yrange") {
 		abs(track_env$track_data[track_index, "ymax"] - track_env$track_data[track_index, "ymin"])
 	} else if(field == "rrange") {
@@ -155,7 +156,7 @@ names.TRACK_META = function(x) {
 	nm = c("xlim", "xmin", "xmax", "xcenter", "xrange",
 		   "theta_lim", "theta_min","theta_max", "theta_center", "theta_range",
 		   "ylim", "ymin", "ymax", "ycenter", "yrange",
-		   "radius_lim", "radius_min", "radius_max", "radius_center", "radius_range",
+		   # "radius_lim", "radius_min", "radius_max", "radius_center", "radius_range",
 		   "abs_height", "rel_height", "track_index")
 
 	return(nm)
@@ -258,4 +259,24 @@ names.TRACK_META = function(x) {
 #
 print.TRACK_META = function(x, ...) {
 	cat("Please use in form of `TRACK_META$name`. Type `names(TRACK_META)` for supported names.\n")
+}
+
+# == title
+# Test whether points are in a track
+#
+# == param
+# -x X-location of data points.
+# -y Y-location of data points.
+# -track_index Index of track.
+#
+# == value
+# A logical vector.
+#
+is_in_track = function(x, y, track_index = current_track_index()) {
+	s = spiral_env$spiral
+	xlim = s$xlim
+	ylim = get_track_data("ylim", track_index)
+	ylim = sort(ylim)
+
+	x >= xlim[1] & x <= xlim[2] & y >= ylim[1] & y <= ylim[2]
 }
