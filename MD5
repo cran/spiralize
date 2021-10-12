@@ -1,11 +1,11 @@
-d2ac4f4d1fb95deb261c91cd31a71869 *DESCRIPTION
+69b776ad3b5e4326d39fcd7f734231eb *DESCRIPTION
 9926ec727f4a07ad169b514f356fdd02 *LICENSE
-4e8993f2651a7f0dff13ba130bdd544e *NAMESPACE
-8ac1046d4a608192267245c890e13f80 *NEWS
-4dbe8f8c6eda40d8d695475666dcd3eb *R/dendrogram.R
+449bfcb9fbf9da7c450f9fbe958b2bd5 *NAMESPACE
+8aed272f91751c21e5028d88f32903b2 *NEWS
+c3616dc70d7f3fb9ffea953415b3db1c *R/dendrogram.R
 8362c6cc15ac2f83661f662aef9162aa *R/global.R
-1268d7b4e0d971a98e315f4ea23565d5 *R/graphics.R
-daaa4fe2278703772fbacfe86a30b968 *R/initialize.R
+561580ee0e8c0480f5d0f5ed801c6830 *R/graphics.R
+f7a1f54bf32a3e49025d7c61225f03e5 *R/initialize.R
 86af67d5559bc0694146d3aecc3420b4 *R/layout.R
 3b77f8aa19ff6ff8b473c153491b3cd1 *R/spiral.R
 8f65cac24dec1a071f429f2ebcb6e3b7 *R/track.R
@@ -13,11 +13,12 @@ daaa4fe2278703772fbacfe86a30b968 *R/initialize.R
 a1761e326f5e6fcf33b09557e0ff616a *R/util.R
 dade3b02d77e65c4571636ce27e6f71f *R/zzz.R
 f20544c223393fe0e030a6db415533e0 *build/vignette.rds
-f622c9f5fc1bbd4df9b604e1719614aa *inst/doc/spiralize.Rmd
-fb721aeb9358fc4e34e0116385f2ae47 *inst/doc/spiralize.html
+185b1772f5e7d348b2a0c57990985a0a *inst/doc/spiralize.Rmd
+95846ea757ac26e4af14428f493dc10c *inst/doc/spiralize.html
 5900df4bf001071b6cadadfce377efb9 *inst/extdata/8.TTOL_mammals_unsmoothed.nwk
 6e08185e201ae8ecb7123f2da1ff79c1 *inst/extdata/BCAT2_tracks.rds
 3a39b4b7b9ac382f1b01130f37daada8 *inst/extdata/CNS_tumour_classification.rds
+6bbf1b809253114af2809bd199fe63d7 *inst/extdata/circadian_expression_mouse_Elf1.rds
 09b54542ff5ea992feb2778db4ee19b9 *inst/extdata/e_10000_digits.txt
 15ced330000b024138993afeccf75ecb *inst/extdata/ggplot2_downloads.rds
 b7aec91aea4badac6487d66769831e8d *inst/extdata/github_commits.rds
@@ -51,7 +52,7 @@ d4e76be2c1920598eaae582bb6bef750 *man/spiral_highlight.Rd
 2585e82999a1a29af91955bcc56dd63a *man/spiral_highlight_by_sector.Rd
 4f8bc92fca1342f03b8c95666567e557 *man/spiral_horizon.Rd
 6902a64291ce32d8b08e6e2fcc3a772b *man/spiral_info.Rd
-25ede07d7704fcecb84ebccb67df25d1 *man/spiral_initialize.Rd
+34ee2e4cabf6eb9afbdcad4d78698b82 *man/spiral_initialize.Rd
 1aa5850523587a39061ecf483a7262d3 *man/spiral_initialize_by_gcoor.Rd
 e108138c6744da46e3aa1bcc57f3c324 *man/spiral_initialize_by_time.Rd
 18a1e92f9a43d6951ae075df1c6dfdee *man/spiral_lines.Rd
@@ -68,4 +69,4 @@ ea9a8b088ca9b7dc8f4170344bef943c *man/spiral_xaxis.Rd
 53727355a50a69e0b516ac2147013281 *man/spiral_yaxis.Rd
 0f3e41df5c8fc983110b9a962737a563 *man/xy_to_cartesian.Rd
 1544a60e931066f52c3645cd4e2393a5 *man/xy_to_polar.Rd
-f622c9f5fc1bbd4df9b604e1719614aa *vignettes/spiralize.Rmd
+185b1772f5e7d348b2a0c57990985a0a *vignettes/spiralize.Rmd
