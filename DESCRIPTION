@@ -1,7 +1,7 @@
 Package: spiralize
 Type: Package
 Title: Visualize Data on Spirals
-Version: 1.0.4
+Version: 1.0.5
 Date: 2022-01-15
 Authors@R: person("Zuguang", "Gu", email = "z.gu@dkfz.de", role = c("aut", "cre"),
                   comment = c('ORCID'="0000-0002-7395-8709"))
@@ -17,8 +17,8 @@ VignetteBuilder: knitr
 URL: https://github.com/jokergoo/spiralize
 License: MIT + file LICENSE
 NeedsCompilation: no
-Packaged: 2022-01-15 19:55:44 UTC; guz
+Packaged: 2022-02-05 17:00:00 UTC; guz
 Author: Zuguang Gu [aut, cre] (<https://orcid.org/0000-0002-7395-8709>)
 Maintainer: Zuguang Gu <z.gu@dkfz.de>
 Repository: CRAN
-Date/Publication: 2022-01-15 20:30:02 UTC
+Date/Publication: 2022-02-05 17:20:02 UTC

@@ -197,21 +197,18 @@ names.TRACK_META = function(x) {
 # == value
 # The corresponding value.
 "$.TRACK_META" = function(x, name) {
-	spiral = spiral_env$spiral
+	spiral = current_spiral()
 
-	if(is.null(spiral)) {
-		stop_wrap("No spiral has been initialized.")
-	}
 	if(n_tracks() == 0) {
 		stop_wrap("No track has been created.")
 	}
 
 	if(name == "xlim") {
-		spiral$get_data_x(spiral$xlim)
+		spiral$get_data_from_x(spiral$xlim)
 	} else if(name == "xmin") {
-		spiral$get_data_x(spiral$xlim[1])
+		spiral$get_data_from_x(spiral$xlim[1])
 	} else if(name == "xmax") {
-		spiral$get_data_x(spiral$xlim[2])
+		spiral$get_data_from_x(spiral$xlim[2])
 	} else if(name == "xrange") {
 		spiral$xlim[2] - spiral$xlim[1]
 	} else if(name == "xcenter") {
@@ -273,7 +270,7 @@ print.TRACK_META = function(x, ...) {
 # A logical vector.
 #
 is_in_track = function(x, y, track_index = current_track_index()) {
-	s = spiral_env$spiral
+	s = current_spiral()
 	xlim = s$xlim
 	ylim = get_track_data("ylim", track_index)
 	ylim = sort(ylim)
