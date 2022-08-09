@@ -383,10 +383,11 @@ spiral_bars = function(pos, value, baseline = get_track_data("ymin", track_index
 	spiral = spiral_env$spiral
 	
 	if(spiral$xclass == "Time") {
-		if(identical(spiral$other$normalize_year, TRUE)) {
-			bar_width = 1/calc_days_in_year(year(as.POSIXlt(pos)))*360
-		} else {
-			bar_width = 1
+		bar_width = 1
+		if(!is.numeric(pos)) {
+			if(identical(spiral$other$normalize_year, TRUE)) {
+				bar_width = 1/calc_days_in_year(year(as.POSIXlt(pos)))*360
+			} 
 		}
 	}
 
@@ -1008,6 +1009,7 @@ spiral_yaxis = function(side = c("both", "start", "end"), at = NULL, labels = TR
 # == param
 # -x X-locations of the data points.
 # -y Y-locations of the data points.
+# -y_max Maximal absolute value on y-axis.
 # -n_slices Number of slices.
 # -slice_size Size of the slices. The final number of sizes is ``ceiling(max(abs(y))/slice_size)``.
 # -pos_fill Colors for positive values. 
@@ -1037,7 +1039,8 @@ spiral_yaxis = function(side = c("both", "start", "end"), at = NULL, labels = TR
 # spiral_track()
 # spiral_horizon(df$Date, df$Mean, use_bar = TRUE)
 # }
-spiral_horizon = function(x, y, n_slices = 4, slice_size, pos_fill = "#D73027", neg_fill = "#313695",
+spiral_horizon = function(x, y, y_max = max(abs(y)), n_slices = 4, slice_size, 
+	pos_fill = "#D73027", neg_fill = "#313695",
 	use_bars = FALSE, bar_width = min(diff(x)),
 	negative_from_top = FALSE, track_index = current_track_index()) {
 
@@ -1048,12 +1051,21 @@ spiral_horizon = function(x, y, n_slices = 4, slice_size, pos_fill = "#D73027", 
 	}
 
 	spiral = spiral_env$spiral
+
+	if(use_bars) {
+		if(spiral$xclass == "Time") {
+			if(identical(spiral$other$normalize_year, TRUE)) {
+				bar_width = 1/calc_days_in_year(year(as.POSIXlt(x)))*360
+			}
+		}
+	}
+
 	x = spiral$get_x_from_data(x)
 
 	if(missing(slice_size)) {
-		slice_size = max(abs(y))/n_slices
+		slice_size = y_max/n_slices
 	}
-	n_slices = ceiling(max(abs(y))/slice_size)
+	n_slices = ceiling(y_max/slice_size)
 
 	if(n_slices == 0) {
 		return(invisible(NULL))
@@ -1169,15 +1181,27 @@ add_horizon_bars = function(x, y, bar_width, slice_size = NULL, from_top = FALSE
 	lty = split_vec_by_NA(y)
 	lbw = split_vec_by_NA(bar_width)
 
+	all_x = NULL
+	all_y = NULL
+	all_bw = NULL
+	if(length(bar_width) <= 1) {
+		all_bw = bar_width
+	}
 	for(i in seq_along(ltx)) {
 		x0 = ltx[[i]]
 		y0 = lty[[i]]
 		bw = lbw[[i]]
-		if(from_top) {
-			spiral_bars(x0, y0/slice_size, bar_width = bw, baseline = 1, ...)
-		} else {
-			spiral_bars(x0, y0/slice_size, bar_width = bw, ...)
+
+		all_x = c(all_x, x0)
+		all_y = c(all_y, y0)
+		if(length(bar_width) > 1) {
+			all_bw = c(all_bw, bw)
 		}
+	}
+	if(from_top) {
+		spiral_bars(all_x, all_y/slice_size, bar_width = all_bw, baseline = 1, ...)
+	} else {
+		spiral_bars(all_x, all_y/slice_size, bar_width = all_bw, ...)
 	}
 }
 
